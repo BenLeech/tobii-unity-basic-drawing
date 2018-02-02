@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8923c8bd5c9e91242b46a16211b7ef5e
+timeCreated: 1506286523
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - GazePoint: {instanceID: 0}
+  - brushPrefab: {fileID: 1233941652189224, guid: 36276e198ce1b534d948c1ee55ee505f,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
