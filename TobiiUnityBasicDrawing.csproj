@@ -84,7 +84,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TestDrawing\ClickBrush.cs" />
     <Compile Include="Assets\Tobii\Framework\DisplayInfo.cs" />
     <Compile Include="Assets\Tobii\Framework\GazeAware.cs" />
     <Compile Include="Assets\Tobii\Framework\GazePoint.cs" />
@@ -124,6 +123,7 @@
     <Compile Include="Assets\Tobii\Framework\TobiiAPI.cs" />
     <Compile Include="Assets\Tobii\Framework\UserPresence.cs" />
     <Compile Include="Assets\Tobii\Plugins\SimpleJSON.cs" />
+    <Compile Include="Assets\TobiiDrawing\ClickBrush.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Tobii\Readme.txt" />

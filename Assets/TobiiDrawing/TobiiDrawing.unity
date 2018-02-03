@@ -209,6 +209,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 96918488889860414, guid: 36276e198ce1b534d948c1ee55ee505f,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36276e198ce1b534d948c1ee55ee505f, type: 2}
   m_IsPrefabParent: 0
@@ -242,7 +247,7 @@ MonoBehaviour:
   GazePoint: {fileID: 0}
   brushPrefab: {fileID: 1233941652189224, guid: 36276e198ce1b534d948c1ee55ee505f,
     type: 2}
-  alpha: 0.3
+  multiplier: 0.3
 --- !u!4 &260363551
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/TestDrawing/TestDrawing.unity
+- path: Assets/TobiiDrawing/TobiiDrawing.unity
   isLoaded: 1
   isActive: 1
