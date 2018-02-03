@@ -36,7 +36,16 @@ Basic eye gaze drawing application in Unity using the Tobii SDK and Framework.
 6. Set-up a profile for each user (for most accurate results) and calibrate
 
 ## Getting started
-To open or run this application locally, first make sure Unity is downloaded. You can download it [here.](https://unity3d.com/get-unity/download)
+To open or run this application locally, there are two options.
+
+First make sure Unity is downloaded. You can download it [here.](https://unity3d.com/get-unity/download)
+
+1. Download TobiiBasicDrawing.unitypackage from the pre-release [here](https://github.com/BenLeech/tobii-unity-basic-drawing/releases/tag/v0.1)
+2. Create a new Unity Project
+3. In the top menubar, go to Assets > Import Package > Custom Package
+4. Import TobiiBasicDrawing.unitypackage
+
+Or
 
 Then clone/download/fork this repository.
 
@@ -49,7 +58,7 @@ Open the project in Unity.
 ## Using Tobii SDK in your own projects
 If you start a project from scratch, you will need to add the Tobii Core SDK into your project first. 
 
-1. Download the Tobii Unity SDK [here].(https://github.com/Tobii/UnitySDK/releases). Save it somewhere easily accessible.
+1. Download the Tobii Unity SDK [here](https://github.com/Tobii/UnitySDK/releases). Save it somewhere easily accessible.
 2. Open Unity, and create a New Unity Project. Select Windows as Target Platform.
 3. On the top menubar, go to Assets > Import Package -> Custom Package...
 4. Import the Tobii Unity SDK package file you just downloaded
@@ -60,6 +69,8 @@ You can now reference the Tobii API in your scripts, or access Tobii assets in U
 
 ## Playing Tobii's Unity Demo Scenes
 If you haven't imported the Tobii Demo scenes already, follow the steps in the [above section](#using-tobii-sdk-in-your-own-projects). Make sure you import the demo scene assets from the package.
+
+In the project view, go to Assets > Tobii > DemoScenes. There are several different demos for you to try out.
 
 ## Getting the Gaze Point from the Tobii SDK
 To create any data streams using the Tobii SDK, you simply need to call getGazePoint() from the Tobii API
