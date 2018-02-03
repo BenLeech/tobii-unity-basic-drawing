@@ -6,7 +6,7 @@ Basic eye gaze drawing application in Unity using the Tobii SDK and Framework.
 2. [Setting up the 4c](#setting-up-the-4c)
 3. [Getting started](#getting-started)
 4. [Using Tobii SDK in your own projects](#using-tobii-sdk-in-your-own-projects)
-5. [Creating your own data streams from the Tobii SDK](#creating-your-own-data-streams-from-the-tobii-sdk)
+5. [Getting the Gaze Point from the Tobii SDK](#getting-the-gaze-point-from-the-tobii-sdk)
 6. [Smoothing Algorithm](#smoothing-algorithm)
 7. [Known Issues](#known-issues)
 8. [Operating System Support and Language Bindings](#operating-system-support-and-language-bindings)
@@ -36,89 +36,55 @@ Basic eye gaze drawing application in Unity using the Tobii SDK and Framework.
 6. Set-up a profile for each user (for most accurate results) and calibrate
 
 ## Getting started
-To open or run this application locally, first clone/download/fork this repository.
+To open or run this application locally, first make sure Unity is downloaded. You can download it [here.](https://unity3d.com/get-unity/download)
+
+Then clone/download/fork this repository.
 
 [Cloning a repository](https://help.github.com/articles/cloning-a-repository/)
 
 [Forking a repository](https://help.github.com/articles/fork-a-repo/)
 
-Run the application from ./TobiiEyeXGrid/TobiiEyexGridApplication.cs, the main class.
-
-## Playing Tobii's Unity Demo Scenes
+Open the project in Unity.
 
 ## Using Tobii SDK in your own projects
-If you start a project from scratch, you will need to add the Tobii Core SDK into your project first. Here is a method to reference the SDK using NuGet Package Manager. The installation guides from Tobii's development website are outdated, so following this guide is recommended.
+If you start a project from scratch, you will need to add the Tobii Core SDK into your project first. 
 
-#### Use Nuget Package Installation
-1. Open Visual Studio
-2. Ensure that Nuget Package Manager is installed by clicking the Tools menu and looking for 'Nuget Package Manager'.
-   - If it is not there, go to 'Tools -> Get Tools and Features', search for NuGet Package Manager, and install.
-3. Expand the Tool menu and click the Options
-4. Expand the NuGet Package Manager from the left tree view
-5. Choose the Package Sources
-6. If nuget.org https://api.nuget.org/v3/index.json isn't listed as a package source:
-   - Type org in the name field
-   - Type https://api.nuget.org/v3/index.json repository URL in the source field
-   - Click on Update
-   - Restart Visual Studio
-7. Ensure that you have the nuget package source from the above step. Close NuGet Package Manager options if you have it open.
-8. Expand your project in the Solution Explorer
-9. Right click on the References
-10. Choose Manage Nuget Packages… from the menu
-12. Click Browse
-13. Choose the org package source to the right
-14. Search for Tobii
-15. Choose package Tobii.Interaction
-16. Click the latest stable version (I am using v0.73)
-17. Click Install
+1. Download the Tobii Unity SDK [here].(https://github.com/Tobii/UnitySDK/releases). Save it somewhere easily accessible.
+2. Open Unity, and create a New Unity Project. Select Windows as Target Platform.
+3. On the top menubar, go to Assets > Import Package -> Custom Package...
+4. Import the Tobii Unity SDK package file you just downloaded
+5. Import all assets in the package (you can unselect DemoScenes if you don't want the demos)
+6. Accept the license agreement
 
-## Creating your own data streams from the Tobii SDK
-To create any data streams using the Tobii SDK, you first need to instantiate a host from the Tobii Interaction package.
+You can now reference the Tobii API in your scripts, or access Tobii assets in Unity.
+
+## Playing Tobii's Unity Demo Scenes
+If you haven't imported the Tobii Demo scenes already, follow the steps in the [above section](#using-tobii-sdk-in-your-own-projects). Make sure you import the demo scene assets from the package.
+
+## Getting the Gaze Point from the Tobii SDK
+To create any data streams using the Tobii SDK, you simply need to call getGazePoint() from the Tobii API
+
 ```
-using Tobii.Interaction;
-
-...
-
-private Host host = new Host();
-```
-The host creates a connection between the application and the Interaction engine, andis the main provider for the various eye tracking features. Intantiating a host provides one Tobii eye tracking context, and it is possible to create more than one host in a process. 
-
-To start a gaze point data stream, call Streams.CreateGazePointDataStream() on a host. Calling GazePoint(x,y,ts) on the data stream exposes functional access to the stream, where x is the gaze's X position relative to the top left corner of the screen, where y is the gaze's Y position relative to the top left corner of the screen, and where ts is the timestamp of when the data node was recorded.
-```
-GazePointDataStream gazePointDataStream = host.Streams.CreateGazePointDataStream();
-
-gazePointDataStream.GazePoint((x, y, ts) => {
-        Console.WriteLine("Gaze Position and Timestamp: {0}\t X: {1} Y:{2}", ts, x, y));
-});
+GazePoint gazePoint = TobiiAPI.GetGazePoint();
 ```
 
-Another option on how to implement the same functionality is my using the 'Next' event on the gaze point data stream instance
-```
-GazePointDataStream gazePointDataStream = host.Streams.CreateGazePointDataStream();
-gazePointDataStream.Next += OnGazePointData;
+This will get the last recorded gaze point. You can put it in unity's update() method to get a gaze point every frame
 
-private OnGazePointData(object sender, StreamData<GazePointData> streamData){
-       Console.WriteLine("Gaze Position and Timestamp: {0}\t X: {1} Y:{2}", streamData.Data.Timestamp, streamData.Data.X, streamData.Data.Y); 
+```
+void Update () {
+
+		GazePoint gazePoint = TobiiAPI.GetGazePoint();
+
 }
 ```
 
-You can also choose to unfilter or lightly filter the gaze data in the creation of the data stream. There are currently only two options, unfiltered and lightly filtered. By default it is set at lightly filtered, but you can specify to unfiltered the stream by passing the enum value in the CreateGazePointDataStream() method params.
-
+You can then access the point by calling the Screen variable, which is a Vector2 point for the gaze point.
 ```
-GazePointDataStream gazePointDataStream = host.Streams.CreateGazePointDataStream(GazePointDataMode.Unfiltered);
+float x = gazePoint.Screen.x;
+float y = gazePont.Screen.y;
 ```
 
-“Lightly filtered” is an adaptive filter which is weighted based on the age of the gaze data points GazePointData and the velocity of the eye movements. This filter is designed to remove noise and in the same time being responsive to quick eye movements. It is recommended to keep the filter on.
-
-There are also three other types of data streams currently.
-- Eye Position (physical location of the eyes)
-- Fixation (stream of position and time of where the gaze gets fixated)
-- Head Pose (phyiscal location of the head, only works on the 4c).
-
-You can destory a host by calling the dispose method on a host instance.
-```
-host.Dispose();
-```
+GetGazePoint() lazily loads the gaze point data, so if you explicitly want to start the gaze point stream, you can use TobiiAPI.SubscribeGazePointData().
 
 ## Smoothing Algorithm
 This application contains basic live data smoothing techniques and algorithms to help smooth the noise of the eye tracking data stream.
