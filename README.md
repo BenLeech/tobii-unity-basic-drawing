@@ -1,5 +1,16 @@
 # Tobii Unity Basic Drawing
-Basic eye gaze drawing application in Unity using the Tobii SDK and Framework.
+Eye Tracking Emoji Drawing program in Unity using the Tobii SDK and Framework.
+
+Executable program in Eye Tracker Emoji Drawing.zip
+
+# Play Instructions
+With Tobii Eye tracker connected
+1. Launch Emoji Eye Tracker.exe or open in unity
+2. Run program
+3. Look at a spot on the canvas to place an emoji, maintain gaze to scale up.
+4. Move eyes to stop scaling.
+5. Look at an emoji in the left side menu to change emojis.
+6. Press ESC to close program.
 
 ## Table of Contents
 1. [Documentation and References](#documentation-and-references)
