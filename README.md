@@ -45,16 +45,6 @@ First make sure Unity is downloaded. You can download it [here.](https://unity3d
 3. In the top menubar, go to Assets > Import Package > Custom Package
 4. Import TobiiBasicDrawing.unitypackage
 
-Or
-
-Then clone/download/fork this repository.
-
-[Cloning a repository](https://help.github.com/articles/cloning-a-repository/)
-
-[Forking a repository](https://help.github.com/articles/fork-a-repo/)
-
-Open the project in Unity.
-
 ## Using Tobii SDK in your own projects
 If you start a project from scratch, you will need to add the Tobii Core SDK into your project first. 
 
