@@ -9,7 +9,8 @@ public class ClickBrush : MonoBehaviour {
 	public GameObject brushPrefab;
 	GameObject thisBrush;
 	Vector2 startPos;
-	Plane objPlane;
+	public GameObject backgroundCanvas;
+    Plane objPlane;
 
 	//Vector3 prevPos;
 
@@ -19,7 +20,8 @@ public class ClickBrush : MonoBehaviour {
 
     // Called at the start of the scene
 	void Start(){
-		objPlane = new Plane(Camera.main.transform.forward*-1, this.transform.position);
+        objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
+    
 	}
 	
 	// Update is called once per frame
@@ -32,7 +34,7 @@ public class ClickBrush : MonoBehaviour {
 			thisBrush = (GameObject)Instantiate (brushPrefab, this.transform.position, Quaternion.identity);
 
 			Ray mRay = Camera.main.ScreenPointToRay (gazePoint.Screen);
-
+            
 			float rayDistance;
             _hasHistoricPoint = false;
 			if (objPlane.Raycast (mRay, out rayDistance)) {
@@ -55,6 +57,7 @@ public class ClickBrush : MonoBehaviour {
                 _hasHistoricPoint = false;
             }	
 		}
+
 	}
 
 	private Vector2 smoothFilter(Vector2 point){
@@ -70,4 +73,11 @@ public class ClickBrush : MonoBehaviour {
 
 		return smoothedPoint;
 	}
+
+    private Vector2 movingAverage(Vector2 point)
+    {
+
+        return point;
+    }
+
 }
